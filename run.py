@@ -70,9 +70,11 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print("Sales workesheet updated succesfully.\n")
 
+
+
 def calucalate_surplus_data(sales_row):
     """
-    Compare sales with stick and calucate the surplus for each item type.
+    Compare sales with stock and calucate the surplus for each item type.
     The surplus is defined as the sales figure subtracted from the stock:
     - Postive surplus indicates waste
     - Negative surplus indicates extra made when stock was sold out.
@@ -89,6 +91,16 @@ def calucalate_surplus_data(sales_row):
    
     return surplus_data
 
+def update_surplus_worksheet(new_surplus_data):
+    """
+    Update surplus worksheet, add new row with the list data provided
+    """
+    
+    print("Updating surplus worksheet...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(new_surplus_data)
+    print("Surplus worksheet updated succesfully.\n")
+
 
 def main():
     """
@@ -98,8 +110,7 @@ def main():
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
     new_surplus_data = calucalate_surplus_data(sales_data)
-    print(new_surplus_data)
-
+    update_surplus_worksheet(new_surplus_data)
 
 print("Welcome to Love Sandwiches Data Automation")
 main()
